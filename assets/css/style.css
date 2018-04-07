@@ -1,0 +1,64 @@
+body {
+    background: url("../images/star-wars-stock.jpg");
+}
+
+.hangman-image {
+    max-width: 100%;
+}
+
+#hangman {
+    background: white;
+    width: 100%;
+}
+
+.jumbotronHeaderImg {
+    background: url("../images/star-wars-title9.JPG");
+    background-size: cover;
+    background-position: center;
+    padding-bottom: 25px;
+}
+
+#my-word {
+    margin: 0;
+    display: block;
+    padding: 0;
+    display:block;
+  }
+
+
+#currentWord {
+    padding-top: 5px;
+}
+
+.gameLabels {
+    font-size: 24px;
+    /* font-family: Georgia, 'Times New Roman', Times, serif; */
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: bold;
+}
+
+.newLetterDiv {
+    /* margin: 0;
+    display: block;
+    padding: 0;
+    display:block;
+    white-space: nowrap;
+    max-width: 100%;
+    overflow: auto; */
+    color: transparent;
+    border-bottom: 3px solid black;
+    padding: 2px;
+    margin: 12px;
+    display: inline;
+    font-size: 36px;
+}
+
+.oldLetterDiv {
+    /* color: transparent; */
+    color: black;
+    /* border-bottom: 3px solid black; */
+    padding: 2px;
+    margin: 12px;
+    display: inline;
+    font-size: 36px;
+}
