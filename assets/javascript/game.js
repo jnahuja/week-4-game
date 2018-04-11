@@ -4,6 +4,7 @@ $(document).ready(function() {
     var charactersDiv = main.find("#characters");
     var rulesDiv = main.find("#rules");
     var arenaHeadingDiv = main.find("#arenaHeading");
+    var attachButtonDiv = main.find("#attackButton");
 
     var audioElement = document.createElement("audio");
     audioElement.setAttribute("src", "assets/star-wars-theme.mp3");
@@ -95,9 +96,25 @@ $(document).ready(function() {
         userHP: 0,
         userAttack: 0,
         userCounterAttack: 0,
+        userCharacterIndex: 0,
         opponentHP: 0,
         opponentAttack: 0,
         opponentCounterAttack: 0,
+        opponentCharacterIndex: 0,
+
+        attack: function () {
+            gamePlay.opponentHP = gamePlay.opponentHP - gamePlay.userAttack;
+            gamePlay.userHP = gamePlay.userHP - gamePlay.opponentCounterAttack;
+        },
+
+        updateHP: function () {
+            var currentDiv = $("#userHP"+gamePlay.userCharacterIndex);
+            currentDiv.text("HP: "+gamePlay.userHP);
+            alert("Updating User HP");
+            currentDiv = $("#userHP"+gamePlay.opponentCharacterIndex);
+            currentDiv.text("HP: "+gamePlay.opponentHP);
+            alert("Updating Opponent HP");
+        }
 
         // initialize: function() {
         //     this.userHP = 0,
@@ -133,16 +150,23 @@ $(document).ready(function() {
             gameCounters.clickCounter = 1;
             console.log(gameCounters.clickCounter);
 
-            var characterArrayIndex = parseInt(currentDiv.attr("character-index"));
-            gamePlay.userHP = characterObject.characterArray[characterArrayIndex].healthPoints;
-            gamePlay.userAttack = characterObject.characterArray[characterArrayIndex].attackPower;
-            gamePlay.userCounterAttack = characterObject.characterArray[characterArrayIndex].counterAttackPower;
+            // var characterArrayIndex = parseInt(currentDiv.attr("character-index"));
+            // gamePlay.userHP = characterObject.characterArray[characterArrayIndex].healthPoints;
+            // gamePlay.userAttack = characterObject.characterArray[characterArrayIndex].attackPower;
+            // gamePlay.userCounterAttack = characterObject.characterArray[characterArrayIndex].counterAttackPower;
+            // console.log(gamePlay.userHP);
+
+            gamePlay.userCharacterIndex = parseInt(currentDiv.attr("character-index"));
+            gamePlay.userHP = characterObject.characterArray[gamePlay.userCharacterIndex].healthPoints;
+            gamePlay.userAttack = characterObject.characterArray[gamePlay.userCharacterIndex].attackPower;
+            gamePlay.userCounterAttack = characterObject.characterArray[gamePlay.userCharacterIndex].counterAttackPower;
             console.log(gamePlay.userHP);
+
 
             // currentDiv = $("#yourCharacter").find("#userHP");        // This works, but it might be easier to update during the fight if the HP div for your character and the opponent's charachter have unique ids
             
             // ACTION - Wrap this in a method for updating the user's HP
-            currentDiv = $("#userHP"+characterArrayIndex);
+            currentDiv = $("#userHP"+gamePlay.userCharacterIndex);
             currentDiv.text("HP: "+gamePlay.userHP);
             // currentDiv.append("<p>HP: "+gamePlay.userHP+"</p>");
 
@@ -158,13 +182,23 @@ $(document).ready(function() {
             currentDiv.addClass("opponentCharacterDiv");
             currentDiv.appendTo("#opponentCharacter");
 
-            var characterArrayIndex = parseInt(currentDiv.attr("character-index"));
-            gamePlay.opponentHP = characterObject.characterArray[characterArrayIndex].healthPoints;
-            gamePlay.opponentAttack = characterObject.characterArray[characterArrayIndex].attackPower;
-            gamePlay.opponentCounterAttack = characterObject.characterArray[characterArrayIndex].counterAttackPower;
+            gamePlay.opponentCharacterIndex = parseInt(currentDiv.attr("character-index"));
+            gamePlay.opponentHP = characterObject.characterArray[gamePlay.opponentCharacterIndex].healthPoints;
+            gamePlay.opponentAttack = characterObject.characterArray[gamePlay.opponentCharacterIndex].attackPower;
+            gamePlay.opponentCounterAttack = characterObject.characterArray[gamePlay.opponentCharacterIndex].counterAttackPower;
 
             gameCounters.clickCounter = 2;
         }
+    });
+
+    attachButtonDiv.on("click", function() {
+        if (gameCounters.clickCounter==2) {
+            alert("attack");
+            gamePlay.attack();
+            gamePlay.updateHP();
+
+        }
+        
     });
 
 
