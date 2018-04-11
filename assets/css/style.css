@@ -1,5 +1,61 @@
 body {
-    background: url("../images/star-wars-stock.jpg");
+    /* background: url("../images/star-wars-stock.jpg"); */
+}
+
+.newCharacterDiv {
+    display: inline-block;
+	width: 200px;
+	border: solid 4px black;
+	margin: 10px;
+	border-radius: 7px;
+}
+
+.updatedCharacter {
+    background: lightgrey;
+}
+
+.updatedCharacterDiv {
+    display: inline-block;
+	width: 200px;
+	border: solid 4px black;
+	margin: 10px;
+    border-radius: 7px;
+    background: lightgrey;
+}
+
+.chosenCharacterDiv {
+    display: inline-block;
+	width: 200px;
+	border: solid 4px black;
+	margin: 10px;
+    border-radius: 7px;
+    background: green;
+    margin-top: 80px;
+}
+
+.opponentCharacterDiv {
+    display: inline-block;
+	width: 200px;
+	border: solid 4px black;
+	margin: 10px;
+    border-radius: 7px;
+    background: red;
+    margin-top: 80px;
+}
+
+p {
+    margin-bottom: 2px;
+}
+
+#character-row {
+    margin: auto;
+}
+
+.subHeadings {
+    font-weight: bold;
+    font-size: 24px;
+    margin: auto;
+    padding: 10px 0px 20px;
 }
 
 .hangman-image {

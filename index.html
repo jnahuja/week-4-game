@@ -37,80 +37,35 @@
 
         </div>
         <!-- This div can be used to store the character cards -->
-        <div class="row characters">
-
-
-        </div>
         <div class="row">
-            <p>
-                Fighting Arena
+            <p class="subHeadings" id="rules">
+                <!-- PICK YOUR SHIP! -->
+            </p>
+        </div>
+        <div class="row text-center">
+            <p id="character-row">
+                <span id="characters"></span>
             </p>
         </div>
         <div class="row">
-            <div class="col-lg-4">
+            <p class="subHeadings" id="arenaHeading">
+                <!-- Fighting Arena -->
+            </p>
+        </div>
+        <div class="row text-center">
+            <div class="col-lg-4" id="yourCharacter">
                 
             </div>
             <div class="col-lg-4 text-center">
-                <button class="btn">
+                <button class="btn" id="attackButton">
                     <span class="glyphicon"></span>Attack!</button>
                 </button>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-4" id="opponentCharacter">
 
             </div>
         </div>
-        <div class="row">
-
-            <div class="col-lg-7">
-
-                <!-- Controls (Superpower Grow/Shrink)-->
-                <div id="Instructions" class="card">
-                    <h4 class="card-header text-center">Press any key to get started!</h4>
-                    <!-- <h4 class="card-header text-center">Gameplay</h4> -->
-                    <div class="card-body">
-                        <div class="text-center gameLabels">
-                            <p>
-                                Wins:
-                                <span id="winsPanel">Test Panel</span>
-                            </p>
-                            <p>
-                                Losses:
-                                <span id="lossesPanel">Test Panel</span>
-                            </p>
-                            <p>
-                                Current Word
-                            </p>
-                            <p>
-                                <span id="currentWord"></span>
-                            </p>
-                            <p>
-                                Number of Guesses Remaining:
-                                <span id="guessesRemaining">Test Panel</span>
-                            </p>
-                            <p>
-                                Letters already guesses
-                            </p>
-                            <p>
-                                <span id="lettersGuessed"></span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-5">
-
-                <!-- Hangman Image -->
-                <!-- <img src="assets/images/hangman-image.jpg" alt="HANGMAN ANIMATION" class="img hangman-image" style="position:absolute";> -->
-                <!-- ; top:50px; left: 80px; z-index: -20; height: 300px"> -->
-
-                <!-- I could also use "img-fluid", which is a bootstrap 4 class that re-sizes the image to fit the parent element -->
-
-                <img src="assets/images/darth-vader-fight.jpg" alt="HANGMAN ANIMATION" class="img hangman-image">
-                <canvas id="hangman" style="border:1px solid #d3d3d3;">This Text will show if the Browser does NOT support HTML5 Canvas tag</canvas>
-                <!-- width="300" height="150" -->
-            </div>
-        </div>
+        
     </div>
 </body>
 
