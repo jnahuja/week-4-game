@@ -28,15 +28,15 @@ $(document).ready(function() {
             {
                 name: 'Millennium Falcon',
                 visual: 'assets/images/millennium-falcon.jpg',
-                healthPoints: 180, 
-                attackPower: 30,
+                healthPoints: 160, 
+                attackPower: 10,
                 counterAttackPower: 20,
             },
             {
                 name: 'USS Enterprise',
                 visual: 'assets/images/uss-enterprise.png', 
                 healthPoints: 200,
-                attackPower: 40,
+                attackPower: 30,
                 counterAttackPower: 15,
             },
             {
