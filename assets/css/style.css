@@ -44,6 +44,7 @@ body {
     border-radius: 7px;
     background: green;
     margin-top: 80px;
+    color: white;
 }
 
 .opponentCharacterDiv {
@@ -54,6 +55,7 @@ body {
     border-radius: 7px;
     background: red;
     margin-top: 80px;
+    color: white;
 }
 
 p {
