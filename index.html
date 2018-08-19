@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="assets/javascript/game.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
 </head>
 
 <body>
@@ -22,9 +23,8 @@
         <div class="jumbotron jumbotronHeaderImg">
 
             <!-- <img src="assets/images/darth-vader-fight.jpg" alt="HANGMAN ANIMATION" class="img hangman-image"> -->
-            <h1 class="text-center">
-                <strong></strong>
-                <br>
+            <h1 class="text-center" id="headerText">
+                <strong>Space Fighter Game</strong>
                 <br>
             </h1>
             <hr>
@@ -54,18 +54,26 @@
         </div>
         <div class="row text-center">
             <div class="col-lg-4" id="yourCharacter">
-                
+
             </div>
             <div class="col-lg-4 text-center">
                 <button class="btn" id="attackButton">
-                    <span class="glyphicon"></span>Attack!</button>
+                    <span class="glyphicon"></span>Start Game</button>
                 </button>
             </div>
             <div class="col-lg-4" id="opponentCharacter">
 
             </div>
         </div>
-        
+        <div class="row">
+            <div class="col-lg-6 attackStatus">
+                <p class="attackStatusText" id="yourFightStatus">
+                </p>
+                <p class="attackStatusText" id="opponentFightStatus">
+                </p>
+            </div>
+        </div>
+
     </div>
 </body>
 

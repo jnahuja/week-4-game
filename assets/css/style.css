@@ -1,5 +1,7 @@
 body {
-    /* background: url("../images/star-wars-stock.jpg"); */
+    background: url("../images/star-wars-stock.jpg");
+    /* background: url("../images/star-wars-stars-background.jpg"); */
+    /* opacity: 0.5; */
 }
 
 .newCharacterDiv {
@@ -7,7 +9,18 @@ body {
 	width: 200px;
 	border: solid 4px black;
 	margin: 10px;
-	border-radius: 7px;
+    border-radius: 7px;
+    background: lightgrey;
+}
+
+#rules {
+    color: red;
+    /* background: black; */
+    font-size: 60px;
+    font-family: 'Orbitron', sans-serif;
+    background: rgba(0, 0, 0, 0.9);
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .updatedCharacter {
@@ -54,8 +67,17 @@ p {
 .subHeadings {
     font-weight: bold;
     font-size: 24px;
+    font-family: 'Orbitron', sans-serif;
     margin: auto;
     padding: 10px 0px 20px;
+}
+
+.attackStatus {
+    font-size: 18px;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+    margin: auto;
+    text-align: center;
 }
 
 .hangman-image {
@@ -68,10 +90,38 @@ p {
 }
 
 .jumbotronHeaderImg {
-    background: url("../images/star-wars-title9.JPG");
+    /* background: url("../images/star-wars-title9.JPG"); */
+    background: url("../images/star-wars-stars-background.jpg");
     background-size: cover;
     background-position: center;
-    padding-bottom: 25px;
+    padding: 0px;
+    padding-bottom: 20px;
+    margin-bottom: 0px;
+    height: 160px;
+}
+
+#headerText {
+    padding-top: 30px;
+    font-family: 'Orbitron', sans-serif;
+    /* padding: 30px 10px; */
+    /* padding: 1 2 3 4; */
+    color: red;
+    /* background: rgba(0, 0, 0, 0.7); */
+}
+
+#attackButton {
+    background-color: darkblue; /* Green */
+    border: 2px solid red;
+    color: white;
+    margin-top: 40px;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-family: 'Orbitron', sans-serif;
+    display: inline-block;
+    font: bold;
+    font-size: 36px;
+    border-radius: 45%;
 }
 
 #my-word {
@@ -80,6 +130,21 @@ p {
     padding: 0;
     display:block;
   }
+
+#arenaHeading {
+    /* padding: 30px 10px; */
+    color: red;
+    background: rgba(0, 0, 0, 0.9);
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.attackStatus {
+    color: red;
+    background: rgba(0, 0, 0, 0.9);
+    padding-left: 20px;
+    padding-right: 20px;
+}
 
 
 #currentWord {

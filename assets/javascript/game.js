@@ -4,7 +4,8 @@ $(document).ready(function() {
     var charactersDiv = main.find("#characters");
     var rulesDiv = main.find("#rules");
     var arenaHeadingDiv = main.find("#arenaHeading");
-    var attachButtonDiv = main.find("#attackButton");
+    var attackButtonDiv = main.find("#attackButton");
+    attackButtonDiv.hide();
 
     var audioElement = document.createElement("audio");
     audioElement.setAttribute("src", "assets/star-wars-theme.mp3");
@@ -17,7 +18,8 @@ $(document).ready(function() {
     });
 
     var gameCounters = {
-        clickCounter: 0 // Can be 0 at the start of the game, switch to 1 when the player's character is chosen, and switch to 2 when the enemy's charater is chosen
+        clickCounter: 0, // Can be 0 at the start of the game, switch to 1 when the player's character is chosen, and switch to 2 when the enemy's charater is chosen
+        enemyCounter: 0
     }
 
 
@@ -68,6 +70,21 @@ $(document).ready(function() {
             rulesDiv.text("Pick Your Enemy!");
             arenaHeadingDiv.text("Fighting Arena");
         },
+        gameOn: function () {
+            rulesDiv.text("Game On!");
+        },
+        pickNewEnemy: function () {
+            // setTimeout($("#opponentCharacter").empty(),3020);
+            rulesDiv.text("Victory! Pick another enemy!");
+        },
+        gameWin: function () {
+            rulesDiv.text("You have won the game!");
+            attackButtonDiv.text("Play Again?");
+        },
+        gameLoss: function () {
+            rulesDiv.text("You have Died...");
+            attackButtonDiv.text("Play Again?");
+        },
         buildCharacterCards: function () {
             for (var i = 0; i < characterObject.characterArray.length; i++) {
                 // 1. Create a variable named "letterDiv" equal to $("<div>") to hold our new div and div properties
@@ -87,6 +104,20 @@ $(document).ready(function() {
                 charactersDiv.append(currentDiv);
             }
         },
+        reset: function () {
+            $("#yourCharacter").empty();
+            $("#opponentCharacter").empty();
+            $("#opponentCharacter").empty();
+            $("#yourFightStatus").empty();
+            $("#opponentFightStatus").empty();
+            // attackButtonDiv.text("Start Game");
+            attackButtonDiv.hide();
+            gameCounters.clickCounter = 0;
+            charactersDiv.empty();
+            gamePlay.reset();
+            gameSetup.buildCharacterCards();
+            gameSetup.defineRules();           
+        }
     }
 
     gameSetup.buildCharacterCards();
@@ -102,18 +133,61 @@ $(document).ready(function() {
         opponentCounterAttack: 0,
         opponentCharacterIndex: 0,
 
+        reset: function () {
+            gamePlay.userHP = 0;
+            gamePlay.userAttack = 0;
+            gamePlay.userCounterAttack = 0;
+            gamePlay.userCharacterIndex = 0;
+            gamePlay.opponentHP = 0;
+            gamePlay.opponentAttack = 0;
+            gamePlay.opponentCounterAttack = 0;
+            gamePlay.opponentCharacterIndex = 0;
+        },
+
         attack: function () {
             gamePlay.opponentHP = gamePlay.opponentHP - gamePlay.userAttack;
             gamePlay.userHP = gamePlay.userHP - gamePlay.opponentCounterAttack;
+
+            var currentDiv = $("#yourFightStatus");
+            currentDiv.text("You attacked opponent with "+gamePlay.userAttack);
+            currentDiv = $("#opponentFightStatus");
+            currentDiv.text("Your opponent attacked you with "+gamePlay.opponentCounterAttack);
+
+            gamePlay.userAttack = gamePlay.userAttack + characterObject.characterArray[gamePlay.userCharacterIndex].attackPower;
         },
 
         updateHP: function () {
             var currentDiv = $("#userHP"+gamePlay.userCharacterIndex);
             currentDiv.text("HP: "+gamePlay.userHP);
-            alert("Updating User HP");
+            // alert("Updating User HP");
             currentDiv = $("#userHP"+gamePlay.opponentCharacterIndex);
             currentDiv.text("HP: "+gamePlay.opponentHP);
-            alert("Updating Opponent HP");
+            // alert("Updating Opponent HP");
+            gamePlay.checkAlive();
+        },
+
+        checkAlive: function () {
+            if (gamePlay.userHP < 1) {
+                $("#characterIndex"+gamePlay.userCharacterIndex).fadeOut(3000,gameSetup.gameLoss());
+                gameCounters.clickCounter = 3;
+                // gameSetup.gameLoss();
+                // alert("You have DIED!");
+            } else if (gamePlay.opponentHP <1) {
+                gameCounters.enemyCounter += 1;
+                if (gameCounters.enemyCounter <4) {
+                    gameCounters.clickCounter = 1;
+                    $("#characterIndex"+gamePlay.opponentCharacterIndex).fadeOut(3000,gameSetup.pickNewEnemy());
+                    // $("#opponentCharacter").empty();
+                    // $("#opponentCharacter").fadeOut(3000,gameSetup.pickNewEnemy());
+                    // gameSetup.pickNewEnemy();
+                } else {
+                    $("#characterIndex"+gamePlay.opponentCharacterIndex).fadeOut(3000,gameSetup.gameWin());
+                    gameCounters.clickCounter = 3;
+                    // gameSetup.gameWin();
+                }
+                
+                // alert("You have vanquished your opponent!");
+            }
         }
 
         // initialize: function() {
@@ -135,6 +209,7 @@ $(document).ready(function() {
 
         // MOVE ALL OF THIS CONTENT INTO A CHARACTER SELECTION OBJECT, WHICH COULD BE COMBINED WITH GAMECOUNTERS AND BECOME AN OBJECT FOR SELECTING YOUR CHARACTERS
         if (gameCounters.clickCounter == 0) {
+            $("#yourCharacter").empty();
             for (i=0; i<characterObject.characterArray.length; i++) {
                 // characterObject.characterArray[i];
                 var currentDiv = $("#characterIndex"+i);
@@ -170,10 +245,13 @@ $(document).ready(function() {
             currentDiv.text("HP: "+gamePlay.userHP);
             // currentDiv.append("<p>HP: "+gamePlay.userHP+"</p>");
 
+            attackButtonDiv.hide();
+
             gameSetup.updateRules();            
             
         }
         else if (gameCounters.clickCounter == 1) {
+            $("#opponentCharacter").empty();
             console.log(this.id);
             console.log("elseif");
             var currentDiv = $("#"+this.id);
@@ -188,17 +266,28 @@ $(document).ready(function() {
             gamePlay.opponentCounterAttack = characterObject.characterArray[gamePlay.opponentCharacterIndex].counterAttackPower;
 
             gameCounters.clickCounter = 2;
+
+            // attackButtonDiv.hide();
+            attackButtonDiv.show();
+            attackButtonDiv.text("Attack!");
+
+            gameSetup.gameOn();
         }
     });
 
-    attachButtonDiv.on("click", function() {
-        if (gameCounters.clickCounter==2) {
-            alert("attack");
+    attackButtonDiv.on("click", function() {
+        // if (gameCounters.clickCounter == 0) {
+        //     attackButtonDiv.text("Pick a Player");
+        // } else if (gameCounters.clickCounter == 1) {
+        //     attackButtonDiv.text("Pick an Enemy");
+        // } else
+        if (gameCounters.clickCounter == 2) {
+            // alert("attack");
             gamePlay.attack();
             gamePlay.updateHP();
-
+        } else if (gameCounters.clickCounter == 3) {
+            gameSetup.reset();
         }
-        
     });
 
 
